@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Report Adding </title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- borrow admin style -->
+  <link rel="stylesheet" type="text/css" href="/static/admin/css/base.css"/>
+  <link rel="stylesheet" type="text/css" href="/static/admin/css/widgets.css"/>
+  <link rel="stylesheet" type="text/css" href="/static/admin/css/forms.css"/>
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <!-- override some style -->
+  <style>
+    html {
+      overflow: hidden;
+      height: 100%;
+      background: #5f3f3f;
+    }
+    body {
+      overflow: auto;
+      max-height: 100%; max-width: 800px;
+      margin: 0 auto; /* center */ padding: 0 20px;
+      border: 1px solid black; border-width: 0 1px;
+      background: #2b2b2b;
+      font-size: 14px;
+      font-family: "Roboto","Lucida Grande","DejaVu Sans","Bitstream Vera Sans",Verdana,Arial,sans-serif;
+    }
+    header, nav, aside, article, footer, main, ol, li {
+      display: flex;
+    }
+    nav, footer, {
+      flex-direction: row;
+      flex-wrap: nowrap;
+    }
+    header, main, article, aside {
+      flex-direction: column;
+    }
+    header a { text-decoration: none; color: #3458B0; }
+    nav a:hover { text-decoration: underline; }
+    header h1 {
+        font-size: 24px;
+        margin-top: 12px;
+        margin-bottom: 0px;
+        text-align: center;
+    }
+    header h2 {
+        font-size: 16px;
+        margin-top: 6px;
+        margin-bottom: 20px;
+        text-align: center;
+        color: #969696;
+    }
+    nav { border-bottom: solid 1px black; border-top: solid 1px black;}
+    nav ol { padding-left: 0; margin: 8px 8px 8px 0; }
+    nav ol li a { padding-right: 12px; }
+    aside { float: right; padding: 0; border-left: dashed 1px black; border-bottom: dashed 1px black; max-width: 220px; }
+    aside h1 { font-size: 24px; margin: 24px 0 0 0; padding-left: 12px; }
+    aside p { margin: 12px; }
+    main { align-items: center; padding: 24px; }
+    main table caption h1 { font-size: 24px; margin: 12px 0 8px 0; text-align: left; }
+    main table thead tr th { text-align: right; padding-right: 40px;}
+    main table tbody tr td { text-align: right; font-size: 14px; padding-right: 40px; }
+    footer { width: 100%; border-top: solid 1px black; justify-content: center; }
+    div#search_form { display: flex; width: 100%; justify-content: space-around;}
+    div#search_form div label { display: inline; }
+    div#search_form div input { display: block; }
+    div#search_form div select { display: block }
+    div#search_form div button  { margin-top: 24px; }
+  </style>
+</head>
+
+<body>
+  <header>
+      <h1><a href="/">Report Adding </a></h1>
+      <h2></h2>
+
+      <nav>
+          <ol>
+              <li><a href="{% url 'admin:index' %}">Demo admin</a></li>
+              <!-- <li><a href="http://xlsxwriter.readthedocs.io/">XlsxWriter</a></li>
+              <li><a href="http://www.reportlab.com/documentation/">ReportLab docs</a></li> -->
+              <li><a href="{% url 'report' %}">Report</a></li>
+              <li><a href="{% url 'index' %}">Home</a></li>
+
+
+          </ol>
+      </nav>
+  </header>
+
+  <aside>
+      <h1>About</h1>
+      <p>A simple demo showing how to export data as Excel and PDF from Django.</p>
+
+
+
+
+
+
+
+
+  </aside>
+
+{% block content %}
+
+  <div class="row">
+  <div class="col-md-8">
+    <div class="card">
+      <div class="card-header">
+        <h5 class="title">Edit Profile</h5>
+      </div>
+      <div class="card-body">
+        <form action="{% url 'report' %}" class="ReportForm" method="post">{% csrf_token %}
+                 
+           
+           
+          </div>
+         
+            
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <div class="form-group">
+                <label>Date</label>
+                {{ form.date }}
+              </div>
+            </div>
+           
+            <div class="col-md-6 pl-md-1">
+              <div class="form-group">
+                <label>MRD</label>
+                {{ form.MRD }}
+              </div>
+            </div>
+          </div>
+      
+    </div>
+  </div>
+   <div class="card card-tasks">
+          <div class="card-header ">
+            <h6 class="title d-inline">TEST (5)</h6>
+            <p class="card-category d-inline">today</p>
+            <div class="dropdown">
+              <button type="button" class="btn btn-link dropdown-toggle btn-icon" data-toggle="dropdown">
+                <i class="tim-icons icon-settings-gear-63"></i>
+              </button>
+              <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink">
+                <a class="dropdown-item" href="#pablo">Action</a>
+                <a class="dropdown-item" href="#pablo">Another action</a>
+                <a class="dropdown-item" href="#pablo">Something else</a>
+              </div>
+            </div>
+          </div>
+          <div class="card-body ">
+            <div class="table-full-width table-responsive">
+              <table class="table">
+                <tbody>
+                  
+                      <td>
+                     
+                            <div class="form-check">
+                              <label class="form-check-label">
+                                {{ form.Dose_adjustment }}
+
+                                <span class="form-check-sign">
+                                  <span class="check"></span>
+                                </span>
+                              </label>
+                            </div> 
+                            <br>
+                              <div class="form-check">
+                                <label class="form-check-label">
+                                  {{ form.renal_impairment }}
+
+                                  <span class="form-check-sign">
+                                    <span class="check"></span>
+                                  </span>
+                                </label>
+                              </div>
+                            </td>
+                      <td>
+                        
+                        <p class="text-muted"> Renal Impairment   </p>
+                        <p class="text-muted" id="demo" >Dose Adjustment</p>
+                    </td>
+                    <td class="td-actions text-right">
+                      <p class="title">GFR {{ form.GFR }}</p>
+                    </td>
+                  </tr>
+                          <tr>
+                        <td>
+                        
+
+                            <div class="form-check">
+                              <label class="form-check-label">
+                                {{ form.Liver_Imparrenenty }}
+
+                                <span class="form-check-sign">
+                                  <span class="check"></span>
+                                </span>
+                              </label>
+                            </div> 
+                            <br>
+                              <div class="form-check">
+                                <label class="form-check-label">
+                                  {{ form.Dose_adjustment_LI }}
+
+                                  <span class="form-check-sign">
+                                    <span class="check"></span>
+                                  </span>
+                                </label>
+                              </div>
+                            </td>
+                    <td>
+                      <p class="title">Liver Imparrenenty</p>
+                      <p class="text-muted">Dose Adjustment</p>
+                    </td>
+                    <td class="td-actions text-right">
+                       <p class="title">Child Pugh Score {{ form.Child_pugh_score }}</p>
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <td>
+                        
+                            <br>
+                              <div class="form-check">
+                                <label class="form-check-label">
+                                  {{ form.intervention }}
+
+                                  <span class="form-check-sign">
+                                    <span class="check"></span>
+                                  </span>
+                                </label>
+                                <p class="text-muted"> Intervention </p>
+
+
+                              </div>
+                            </td>
+                      <td>
+                         <p class="title">Urine Output</p>
+                           </td>
+                       <td>
+                          <div class="form-check">
+                                  <label class="form-check-label">
+                                    {{ form.Urine_output }}
+                                  </label>
+                                </div> 
+                                   </td>
+                                    </tr> 
+                                      <tr>
+                                        <td>
+                                          </td>
+                    <td>
+                      <p class="title">BALANCE</p>
+                      <p class="text-muted">descrption </p>
+                    </td>
+                    <td class="td-actions text-right">
+                      <div class="form-check">
+                        <label class="form-check-label">
+                          {{ form.Balance }}
+                         
+                        </label>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                     
+                    </td>
+                    <td>
+                      <p class="title">Feeding</p>
+                      <p class="text-muted">Capitol Hill, Seattle, WA 12:34 AM</p>
+                    </td>
+                    <td class="td-actions text-right">
+                       <div class="form-check">
+                        <label class="form-check-label">
+                          {{ form.Feeding }}
+                          
+                        </label>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                     
+                    </td>
+                    <td>
+                      <p class="title">Bowel Motion</p>
+                      <p class="text-muted">Capitol Hill, Seattle, WA 12:34 AM</p>
+                    </td>
+                    <td class="td-actions text-right">
+                       <div class="form-check">
+                        <label class="form-check-label">
+                          {{ form.Bowel_motion }}
+                          
+                        </label>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                        <td>
+                          
+                          
+
+                            
+                              
+                            
+
+                            </td>   
+                      <td>
+                        
+                                
+                        
+                    </td>
+                         
+                    <td class="td-actions text-right">
+                            
+                            
+
+                              
+                      </td>
+                        </tr>
+                          <tr>
+                        <td>
+                         
+                         
+                            
+                              
+                             <div class="form-group" id="otherFieldDiv2">
+                                <label for="otherField3"></label>
+                                <select class="form-control" id="otherField3">
+                                  <option>METABOLIC</option>
+                                  <option>Acidosis</option>
+                                  <option>Alkalosis</option>
+                                
+                                </select>
+
+                               
+                                <label for="otherField4"></label>
+                                <select class="form-control" id="otherField4">
+                                  <option>RESPIRATORY</option>
+                                  <option>Acidosis</option>
+                                  <option>Alkalosis</option>
+                                  
+                                </select>
+                              </div>
+                         
+                             
+                            </td>   
+                      <td>
+                        
+                        
+                    </td>
+                    <td class="td-actions text-right">
+                      
+                            <p class="text-muted"> 
+                            ACID/BASE  IMBALANCE</p>
+                            
+                              
+                      </td>
+                        </tr>
+                   
+                  
+
+                  <tr>
+                    <td>
+                     
+                    </td>
+                    <td>
+                      <p class="title">Electrolytes Imbalance</p>
+                    </td>
+                    <td class="td-actions text-right">
+                       <div class="form-check">
+                        <label class="form-check-label">
+                          {{ form.Electrolytes_imbalance }}
+                          
+                        </label>
+                      </div>
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <td>
+                     
+                    </td>
+                    <td>
+                      <p class="title">Hyper Hypo</p>
+                    </td>
+                    <td class="td-actions text-right">
+                       <div class="form-check">
+                        <label class="form-check-label">
+                          {{ form.Hyper_Hypo }}
+                          
+                        </label>
+                      </div>
+                    </td>
+                  </tr>
+
+                   <tr>
+                    <td>
+                     
+                    </td>
+                    <td>
+                      <p class="title">Acid Base Imbalance</p>
+                    </td>
+                    <td class="td-actions text-right">
+                       <div class="form-check">
+                        <label class="form-check-label">
+                          {{ form.ABI }}
+                          
+                        </label>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      
+                    </td>
+                    <td class="form-check-label">
+                       <p class="title">Metabolic Number {{ form.Metabolic_num }}</p>
+                       <div class="form-check">
+                        <label class="form-check-label">
+                          {{ form.Metabolic }}
+                          
+                        </label>
+                      </div>
+                    </td>
+                     <td class="td-actions text-right">
+                       <p class="title">Respiratory Number {{ form.Respiratory_num }}</p>
+                       <div class="form-check">
+                        <label class="form-check-label">
+                          {{ form.Respiratory }}
+                          
+                        </label>
+                      </div>
+                    </td>
+
+                    </td>
+                   
+                  </tr>
+                  <tr>
+                    <td>
+                      
+                    </td>
+                    <td class="form-check-label">
+                       <p class="title">QT_C Number {{ form.QT_C_num }}</p>
+                       <div class="form-check">
+                        
+                      </div>
+                    </td>
+                     <td class="td-actions text-right">
+                      <label class="form-check-label">
+                          {{ form.QT_C }}
+                          
+                        </label>
+                      
+                    </td>
+
+                    </td>
+                   
+                  </tr>
+
+                  <tr>
+                    <td>
+                      
+                    </td>
+                    <td class="form-check-label">
+                       <p class="title">VITALS
+                       <div class="form-check">
+                        
+                      </div>
+                    </td>
+                     <td class="td-actions text-right">
+                      <label class="form-check-label">
+                          {{ form.VITALS }}
+                          
+                        </label>
+                    </td>
+
+                    </td>
+                   
+                  </tr>
+                  <tr>
+                    <td>
+                      
+                    </td>
+                    <td class="form-check-label">
+                       <p class="title">Analgesic and Pain Management
+                       <div class="form-check">
+                        <label class="form-check-label">
+                          
+                          
+                        </label>
+                      </div>
+                    </td>
+                     <td class="td-actions text-right">
+                     <div class="form-check">
+                                <label class="form-check-label">
+                                  {{ form.Analgesic_management }}
+
+                                  <span class="form-check-sign">
+                                    <span class="check"></span>
+                                  </span>
+                                </label>
+                              </div>
+                    </td>
+
+                    </td>
+                   
+                  </tr>
+                  <tr>
+                    <td>
+                      
+                    </td>
+                    <td class="form-check-label">
+                       <p class="title">Sedation
+                       <div class="form-check">
+                        <label class="form-check-label">
+                          
+                          
+                        </label>
+                      </div>
+                    </td>
+                     <td class="td-actions text-right">
+                     <div class="form-check">
+                                <label class="form-check-label">
+                                  {{ form.Sedation }}
+
+                                  <span class="form-check-sign">
+                                    <span class="check"></span>
+                                  </span>
+                                </label>
+                              </div>
+                    </td>
+
+                    </td>
+                   
+                  </tr>
+                   <tr>
+                    <td>
+                      
+                    </td>
+                    <td class="form-check-label">
+                       <p class="title">Thromboembolic Prophylaxis
+                       <div class="form-check">
+                        
+                      </div>
+                    </td>
+                     <td class="td-actions text-right">
+                      <label class="form-check-label">
+                          {{ form.Thromboembolic_Prophylaxis }}
+                          
+                        </label>
+                    </td>
+
+                    </td>
+                   
+                  </tr>
+                   <tr>
+                    <td>
+                      
+                    </td>
+                    <td class="form-check-label">
+                       <p class="title">Stress Ulcer Pophylaxis
+                       <div class="form-check">
+                        
+                      </div>
+                    </td>
+                     <td class="td-actions text-right">
+                      <label class="form-check-label">
+                          {{ form.Stress_Ulcer_Pophylaxis }}
+                          
+                        </label>
+                    </td>
+
+                    </td>
+                   
+                  </tr>
+                     <tr>
+                    <td>
+                      
+                    </td>
+                    <td class="form-check-label">
+                       <p class="title">Target BG 
+                       <div class="form-check">
+                        
+                      </div>
+                    </td>
+                     <td class="td-actions text-right">
+                      <label class="form-check-label">
+                          {{ form.T_BG }}
+                          
+                        </label>
+                    </td>
+
+                    </td>
+                   
+                  </tr>
+                  <tr>
+                    <td>
+                      
+                    </td>
+                    <td class="form-check-label">
+                       <p class="title">Infection                       
+                        <div class="form-check">
+                        
+                      </div>
+                    </td>
+                     <td class="td-actions text-right">
+                      <label class="form-check-label">
+                          {{ form.Infection }}
+                          
+                        </label>
+                    </td>
+
+                    </td>
+                   
+                  </tr>
+                  <tr>
+                    <td>
+                      
+                    </td>
+                    <td class="form-check-label">
+                       <p class="title">Treatment 
+                       <div class="form-check">
+                        
+                      </div>
+                    </td>
+                     <td class="td-actions text-right">
+                      <label class="form-check-label">
+                          {{ form.Treatment }}
+                          
+                        </label>
+                    </td>
+
+                    </td>
+                   
+                  </tr>
+                   <tr>
+                    <td>
+                      
+                    </td>
+                    <td class="form-check-label">
+                       <p class="title">AB INTERVENTION
+                       <div class="form-check">
+                        
+                      </div>
+                    </td>
+                     <td class="td-actions text-right">
+                      <label class="form-check-label">
+                          {{ form.AB_INTERVENTION }}
+                          
+                        </label>
+                    </td>
+
+                    </td>
+                   
+                  </tr>
+                   <tr>
+                    <td>
+                      
+                    </td>
+                    <td class="form-check-label">
+                       <p class="title">MP Monitoring Parameter
+                       <div class="form-check">
+                        
+                      </div>
+                    </td>
+                     <td class="td-actions text-right">
+                      <label class="form-check-label">
+                          {{ form.MP_LIST }}
+                          
+                        </label>
+                    </td>
+
+                    </td>
+                   
+                  </tr>
+                                      
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+
+
+                                                  
+                
+                     
+            </div>
+          </div>
+
+
+          <div class="card-footer">
+        <button type="submit" class="btn btn-fill btn-primary">Save</button>
+      </form>
+      </div>
+        
+      
+      
+
+
+    </div>
+  </div>
+  
+
+</div>
+
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+
+{% block javascripts %}
+
+
+<script>
+    $( function() {
+        $("#id_date").datepicker({ dateFormat: "yy-mm-dd" });
+    });
+  </script>
+{% endblock javascripts %}
