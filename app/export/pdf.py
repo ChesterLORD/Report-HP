@@ -42,10 +42,10 @@ class PdfPrint:
         # set up styles
         styles = getSampleStyleSheet()
         styles.add(ParagraphStyle(
-            name="TableHeader", fontSize=11, alignment=TA_CENTER,
+            name="TableHeader", fontSize=9, alignment=TA_CENTER,
             fontName="FreeSansBold"))
         styles.add(ParagraphStyle(
-            name="ParagraphTitle", fontSize=11, alignment=TA_JUSTIFY,
+            name="ParagraphTitle", fontSize=9, alignment=TA_JUSTIFY,
             fontName="FreeSansBold"))
         styles.add(ParagraphStyle(
             name="Justify", alignment=TA_JUSTIFY, fontName="FreeSans"))
@@ -58,23 +58,17 @@ class PdfPrint:
         table_data.append([
             Paragraph('Date', styles['TableHeader']),
             Paragraph('Station', styles['TableHeader']),
-            Paragraph('GFR', styles['TableHeader']),
-            Paragraph('renal_impairment', styles['TableHeader']),
-            Paragraph('Liver_Imparrenenty', styles['TableHeader'])
         ])
         for wh in weather_history:
             # add a row to table
             table_data.append([
                 wh.date,
                 Paragraph(wh.patient, styles['Justify']),
-                u"{0} ".format(wh.GFR),
-                u"{0} ".format(wh.renal_impairment),
-                u"{0} ".format(wh.Liver_Imparrenenty)
             ])
         # create table1
 
-        wh_table = Table(table_data, colWidths=[doc.width/5.0]*5)
-        wh_table.hAlign = 'LEFT'
+        wh_table = Table(table_data, colWidths=280, rowHeights=50)
+        wh_table.hAlign = 'CENTER'
         wh_table.setStyle(TableStyle(
             [('INNERGRID', (0, 0), (-1, -1), 0.25, colors.black),
              ('BOX', (0, 0), (-1, -1), 0.5, colors.black),
@@ -90,26 +84,26 @@ class PdfPrint:
         table_data_2 = []
          # table header
         table_data_2.append([
+            Paragraph('GFR', styles['TableHeader']),
             Paragraph('Child_pugh_score', styles['TableHeader']),
-            Paragraph('Dose_adjustment', styles['TableHeader']),
-            Paragraph('Balance', styles['TableHeader']),
-            Paragraph('intervention', styles['TableHeader']),
-            Paragraph('Dose_adjustment_LI', styles['TableHeader'])
+            Paragraph('Liver_Imparrenenty', styles['TableHeader']),
         ])
         for wh in weather_history:
          # add a row to table
             table_data_2.append([
+                u"{0} ".format(wh.GFR),
                 u"{0} ".format(wh.Child_pugh_score),
-                u"{0} ".format(wh.Dose_adjustment),
-                u"{0} ".format(wh.Balance),
-                u"{0} ".format(wh.intervention),
-                u"{0} ".format(wh.Dose_adjustment_LI)
+                u"{0} ".format(wh.Liver_Imparrenenty),
+                
+
             ])
 
         # create table2
 
-        wh_table = Table(table_data_2, colWidths=[doc.width/5.0]*5)
-        wh_table.hAlign = 'LEFT'
+        wh_table = Table(table_data_2,  colWidths=200, rowHeights=50)
+
+
+        wh_table.hAlign = 'CENTER'
         wh_table.setStyle(TableStyle(
             [('INNERGRID', (0, 0), (-1, -1), 0.25, colors.black),
              ('BOX', (0, 0), (-1, -1), 0.5, colors.black),
@@ -119,32 +113,94 @@ class PdfPrint:
         data.append(Spacer(1,1))
 
 
+#-----------------------------------------------
 
 
+       
         table_data_3 = []
          # table header
         table_data_3.append([
-            Paragraph('Child_pugh_score', styles['TableHeader']),
             Paragraph('Dose_adjustment', styles['TableHeader']),
             Paragraph('Balance', styles['TableHeader']),
-            Paragraph('intervention', styles['TableHeader']),
-            Paragraph('Dose_adjustment_LI', styles['TableHeader'])
         ])
         for wh in weather_history:
          # add a row to table
             table_data_3.append([
+                u"{0} ".format(wh.Dose_adjustment),
+                u"{0} ".format(wh.Balance),
+                
+
+            ])
+
+        # create table2
+
+        wh_table = Table(table_data_3,  colWidths=283, rowHeights=50)
+
+
+        wh_table.hAlign = 'CENTER'
+        wh_table.setStyle(TableStyle(
+            [('INNERGRID', (0, 0), (-1, -1), 0.25, colors.black),
+             ('BOX', (0, 0), (-1, -1), 0.5, colors.black),
+             ('VALIGN', (0, 0), (-1, 0), 'MIDDLE'),
+             ('BACKGROUND', (0, 0), (-1, 0), colors.gray)]))
+        data.append(wh_table)
+        data.append(Spacer(1,1))
+
+#-----------------------------------------------------------        
+
+        table_data_4 = []
+         # table header
+        table_data_4.append([
+            Paragraph('intervention', styles['TableHeader']),
+            Paragraph('Urine_output', styles['TableHeader']),
+            Paragraph('Feeding', styles['TableHeader']),
+            
+
+        ])
+        for wh in weather_history:
+         # add a row to table
+            table_data_4.append([
+                u"{0} ".format(wh.intervention),
                 u"{0} ".format(wh.Urine_output),
                 u"{0} ".format(wh.Feeding),
-                u"{0} ".format(wh.Bowel_motion),
-                u"{0} ".format(wh.Electrolytes_imbalance),
-                u"{0} ".format(wh.Hyper_Hypo)
+              
             ])
 
 
         # create table3
 
-        wh_table = Table(table_data_3, colWidths=[doc.width/5.0]*5)
-        wh_table.hAlign = 'LEFT'
+        wh_table = Table(table_data_4, colWidths=200, rowHeights=50)
+        wh_table.hAlign = 'CENTER'
+        wh_table.setStyle(TableStyle(
+            [('INNERGRID', (0, 0), (-1, -1), 0.25, colors.black),
+             ('BOX', (0, 0), (-1, -1), 0.5, colors.black),
+             ('VALIGN', (0, 0), (-1, 0), 'MIDDLE'),
+             ('BACKGROUND', (0, 0), (-1, 0), colors.gray)]))
+        data.append(wh_table)
+        data.append(Spacer(1,1))
+
+#-----------------------------------------------------------
+        table_data_5 = []
+         # table header
+        table_data_5.append([
+            
+            Paragraph('Bowel_motion', styles['TableHeader']),
+            Paragraph('Electrolytes_imbalance', styles['TableHeader']),
+
+        ])
+        for wh in weather_history:
+         # add a row to table
+            table_data_5.append([
+               
+                u"{0} ".format(wh.Bowel_motion),
+                u"{0} ".format(wh.Electrolytes_imbalance),
+            ])
+
+
+        # create table3
+
+        wh_table = Table(table_data_5, colWidths=283, rowHeights=50)
+        wh_table.hAlign = 'CENTER'
         wh_table.setStyle(TableStyle(
             [('INNERGRID', (0, 0), (-1, -1), 0.25, colors.black),
              ('BOX', (0, 0), (-1, -1), 0.5, colors.black),
@@ -156,29 +212,32 @@ class PdfPrint:
 
 
 
-        table_data_4= []
+#-----------------------------------------------------------        
+
+
+
+
+        table_data_6= []
          # table header
-        table_data_4.append([
-            Paragraph('Child_pugh_score', styles['TableHeader']),
-            Paragraph('Dose_adjustment', styles['TableHeader']),
-            Paragraph('Balance', styles['TableHeader']),
-            Paragraph('intervention', styles['TableHeader']),
-            Paragraph('Dose_adjustment_LI', styles['TableHeader'])
+        table_data_6.append([
+            Paragraph('Hyper_Hypo', styles['TableHeader']),
+            Paragraph('ABI', styles['TableHeader']),
+            Paragraph('Metabolic_num', styles['TableHeader']),
+            
         ])
         for wh in weather_history:
          # add a row to table
-            table_data_4.append([
+            table_data_6.append([
+                u"{0} ".format(wh.Hyper_Hypo),
                 u"{0} ".format(wh.ABI),
                 u"{0} ".format(wh.Metabolic_num),
-                u"{0} ".format(wh.Respiratory_num),
-                u"{0} ".format(wh.Metabolic),
-                u"{0} ".format(wh.Respiratory)
+               
             ])
 
         # create table3
 
-        wh_table = Table(table_data_4, colWidths=[doc.width/5.0]*5)
-        wh_table.hAlign = 'LEFT'
+        wh_table = Table(table_data_6 , colWidths=200, rowHeights=50)
+        wh_table.hAlign = 'CENTER'
         wh_table.setStyle(TableStyle(
             [('INNERGRID', (0, 0), (-1, -1), 0.25, colors.black),
              ('BOX', (0, 0), (-1, -1), 0.5, colors.black),
@@ -188,24 +247,78 @@ class PdfPrint:
         data.append(Spacer(1,1))    
 
 
-
-
-
-        table_data_5 = []
+#---------------------------------------------------------------------
+        table_data_7= []
          # table header
-        table_data_5.append([
-            Paragraph('Child_pugh_score', styles['TableHeader']),
-            Paragraph('Dose_adjustment', styles['TableHeader']),
-            Paragraph('Balance', styles['TableHeader']),
-            Paragraph('intervention', styles['TableHeader']),
-            Paragraph('Dose_adjustment_LI', styles['TableHeader'])
+        table_data_7.append([
+            
+            Paragraph('Respiratory_num', styles['TableHeader']),
+            Paragraph('Metabolic', styles['TableHeader']),
+            Paragraph('Respiratory', styles['TableHeader'])
         ])
         for wh in weather_history:
          # add a row to table
-            table_data_5.append([
+            table_data_7.append([
+                
+                u"{0} ".format(wh.Respiratory_num),
+                u"{0} ".format(wh.Metabolic),
+                u"{0} ".format(wh.Respiratory)
+            ])
+
+        # create table3
+
+        wh_table = Table(table_data_7 , colWidths=200, rowHeights=50)
+        wh_table.hAlign = 'CENTER'
+        wh_table.setStyle(TableStyle(
+            [('INNERGRID', (0, 0), (-1, -1), 0.25, colors.black),
+             ('BOX', (0, 0), (-1, -1), 0.5, colors.black),
+             ('VALIGN', (0, 0), (-1, 0), 'MIDDLE'),
+             ('BACKGROUND', (0, 0), (-1, 0), colors.gray)]))
+        data.append(wh_table)
+        data.append(Spacer(1,1))    
+#------------------------------------------------------------------------
+
+
+        table_data_8 = []
+         # table header
+        table_data_8.append([
+            Paragraph('QT_C', styles['TableHeader']),
+            Paragraph('QT_C_num', styles['TableHeader']),
+           
+        ])
+        for wh in weather_history:
+         # add a row to table
+            table_data_8.append([
                 u"{0} ".format(wh.QT_C),
                 u"{0} ".format(wh.QT_C_num),
-                u"{0} ".format(wh.VITALS),
+             
+            ])
+
+
+
+        # create table3
+
+        wh_table = Table(table_data_8, colWidths=283, rowHeights=50)
+        wh_table.hAlign = 'CENTER'
+        wh_table.setStyle(TableStyle(
+            [('INNERGRID', (0, 0), (-1, -1), 0.25, colors.black),
+             ('BOX', (0, 0), (-1, -1), 0.5, colors.black),
+             ('VALIGN', (0, 0), (-1, 0), 'MIDDLE'),
+             ('BACKGROUND', (0, 0), (-1, 0), colors.gray)]))
+        data.append(wh_table)
+        data.append(Spacer(1,1))
+#-----------------------------------------------------------------------
+        table_data_9 = []
+         # table header
+        table_data_9.append([
+            
+            Paragraph('Analgesic_management', styles['TableHeader']),
+            Paragraph('Sedation', styles['TableHeader'])
+        ])
+        for wh in weather_history:
+         # add a row to table
+            table_data_9.append([
+               
                 u"{0} ".format(wh.Analgesic_management),
                 u"{0} ".format(wh.Sedation)
             ])
@@ -214,8 +327,8 @@ class PdfPrint:
 
         # create table3
 
-        wh_table = Table(table_data_5, colWidths=[doc.width/5.0]*5)
-        wh_table.hAlign = 'LEFT'
+        wh_table = Table(table_data_9, colWidths=280, rowHeights=50)
+        wh_table.hAlign = 'CENTER'
         wh_table.setStyle(TableStyle(
             [('INNERGRID', (0, 0), (-1, -1), 0.25, colors.black),
              ('BOX', (0, 0), (-1, -1), 0.5, colors.black),
@@ -223,33 +336,60 @@ class PdfPrint:
              ('BACKGROUND', (0, 0), (-1, 0), colors.gray)]))
         data.append(wh_table)
         data.append(Spacer(1,1))
+
+#---------------------------------------------------------------------------               
         
 
 
-        table_data_6 = []
+        table_data_10 = []
          # table header
-        table_data_6.append([
-            Paragraph('Child_pugh_score', styles['TableHeader']),
-            Paragraph('Dose_adjustment', styles['TableHeader']),
-            Paragraph('Balance', styles['TableHeader']),
-            Paragraph('intervention', styles['TableHeader']),
-            Paragraph('Dose_adjustment_LI', styles['TableHeader'])
+        table_data_10.append([
+            Paragraph('Thromboembolic_Prophylaxis', styles['TableHeader']),
+            Paragraph('Stress_Ulcer_Pophylaxis', styles['TableHeader']),
+           
         ])
         for wh in weather_history:
          # add a row to table
-            table_data_6.append([
+            table_data_10.append([
                 u"{0} ".format(wh.Thromboembolic_Prophylaxis),
                 u"{0} ".format(wh.Stress_Ulcer_Pophylaxis),
+               
+            ])
+
+
+        # create table3
+
+        wh_table = Table(table_data_10, colWidths=280, rowHeights=50)
+        wh_table.hAlign = 'CENTER'
+        wh_table.setStyle(TableStyle(
+            [('INNERGRID', (0, 0), (-1, -1), 0.25, colors.black),
+             ('BOX', (0, 0), (-1, -1), 0.5, colors.black),
+             ('VALIGN', (0, 0), (-1, 0), 'MIDDLE'),
+             ('BACKGROUND', (0, 0), (-1, 0), colors.gray)]))
+        data.append(wh_table)
+        data.append(Spacer(1,1))
+#----------------------------------------------------------------------------
+
+        table_data_11 = []
+         # table header
+        table_data_11.append([
+            
+            Paragraph('Glycemic_control_target_BG', styles['TableHeader']),
+            Paragraph('Infection', styles['TableHeader'])
+        ])
+        for wh in weather_history:
+         # add a row to table
+            table_data_11.append([
+                
                 u"{0} ".format(wh.Glycemic_control_target_BG),
-                u"{0} ".format(wh.T_BG),
                 u"{0} ".format(wh.Infection)
             ])
 
 
         # create table3
 
-        wh_table = Table(table_data_6, colWidths=[doc.width/5.0]*5)
-        wh_table.hAlign = 'LEFT'
+        wh_table = Table(table_data_11, colWidths=283, rowHeights=50)
+        wh_table.hAlign = 'CENTER'
         wh_table.setStyle(TableStyle(
             [('INNERGRID', (0, 0), (-1, -1), 0.25, colors.black),
              ('BOX', (0, 0), (-1, -1), 0.5, colors.black),
@@ -257,27 +397,26 @@ class PdfPrint:
              ('BACKGROUND', (0, 0), (-1, 0), colors.gray)]))
         data.append(wh_table)
         data.append(Spacer(1,1))
+
+#----------------------------------------------------------------------                
         
 
-        table_data_7 = []
+        table_data_12 = []
          # table header
-        table_data_7.append([
-            Paragraph('Child_pugh_score', styles['TableHeader']),
-            Paragraph('Dose_adjustment', styles['TableHeader']),
-            Paragraph('Balance', styles['TableHeader']),
+        table_data_12.append([
+            Paragraph('Treatment', styles['TableHeader']),
            
         ])
         for wh in weather_history:
          # add a row to table
-            table_data_7.append([
+            table_data_12.append([
                 u"{0} ".format(wh.Treatment),
-                u"{0} ".format(wh.AB_INTERVENTION),
-                u"{0} ".format(wh.MP_LIST),
+               
            
             ])
 
-        wh_table = Table(table_data_7, colWidths=[doc.width/5.0]*5)
-        wh_table.hAlign = 'LEFT'
+        wh_table = Table(table_data_12,colWidths=280, rowHeights=50)
+        wh_table.hAlign = 'CENTER'
         wh_table.setStyle(TableStyle(
             [('INNERGRID', (0, 0), (-1, -1), 0.25, colors.black),
              ('BOX', (0, 0), (-1, -1), 0.5, colors.black),
@@ -285,7 +424,124 @@ class PdfPrint:
              ('BACKGROUND', (0, 0), (-1, 0), colors.gray)]))
         data.append(wh_table)
         data.append(Spacer(1,1))    
+#---------------------------------------------------------------------
+#----------------------------------------------------------------------                
         
+
+        table_data_13 = []
+         # table header
+        table_data_13.append([
+            
+            Paragraph('AB_INTERVENTION', styles['TableHeader']),
+           
+        ])
+        for wh in weather_history:
+         # add a row to table
+            table_data_13.append([
+               
+                u"{0} ".format(wh.AB_INTERVENTION),
+                
+           
+            ])
+
+        wh_table = Table(table_data_13, colWidths=280, rowHeights=50)
+        wh_table.hAlign = 'CENTER'
+        wh_table.setStyle(TableStyle(
+            [('INNERGRID', (0, 0), (-1, -1), 0.25, colors.black),
+             ('BOX', (0, 0), (-1, -1), 0.5, colors.black),
+             ('VALIGN', (0, 0), (-1, 0), 'MIDDLE'),
+             ('BACKGROUND', (0, 0), (-1, 0), colors.gray)]))
+        data.append(wh_table)
+        data.append(Spacer(1,1))    
+#--------------------------------------------------------------------- 
+#----------------------------------------------------------------------                
+        
+
+        table_data_14 = []
+         # table header
+        table_data_14.append([
+           
+            Paragraph('MP_LIST', styles['TableHeader']),
+           
+        ])
+        for wh in weather_history:
+         # add a row to table
+            table_data_14.append([
+              
+                u"{0} ".format(wh.MP_LIST),
+           
+            ])
+
+        wh_table = Table(table_data_14, colWidths=280, rowHeights=50)
+        wh_table.hAlign = 'CENTER'
+        wh_table.setStyle(TableStyle(
+            [('INNERGRID', (0, 0), (-1, -1), 0.25, colors.black),
+             ('BOX', (0, 0), (-1, -1), 0.5, colors.black),
+             ('VALIGN', (0, 0), (-1, 0), 'MIDDLE'),
+             ('BACKGROUND', (0, 0), (-1, 0), colors.gray)]))
+        data.append(wh_table)
+        data.append(Spacer(1,1))    
+#---------------------------------------------------------------------
+#----------------------------------------------------------------------                
+        
+
+        table_data_15 = []
+         # table header
+        table_data_15.append([
+           
+            Paragraph('VITALS', styles['TableHeader']),
+           
+        ])
+        for wh in weather_history:
+         # add a row to table
+            table_data_15.append([
+              
+                u"{0} ".format(wh.VITALS),
+           
+            ])
+
+        wh_table = Table(table_data_15, colWidths=280, rowHeights=50)
+        wh_table.hAlign = 'CENTER'
+        wh_table.setStyle(TableStyle(
+            [('INNERGRID', (0, 0), (-1, -1), 0.25, colors.black),
+             ('BOX', (0, 0), (-1, -1), 0.5, colors.black),
+             ('VALIGN', (0, 0), (-1, 0), 'MIDDLE'),
+             ('BACKGROUND', (0, 0), (-1, 0), colors.gray)]))
+        data.append(wh_table)
+        data.append(Spacer(1,1))    
+#--------------------------------------------------------------------- 
+#----------------------------------------------------------------------                
+        
+
+        table_data_16 = []
+         # table header
+        table_data_16.append([
+           
+            Paragraph('T_BG', styles['TableHeader']),
+           
+        ])
+        for wh in weather_history:
+         # add a row to table
+            table_data_16.append([
+              
+                u"{0} ".format(wh.T_BG),
+           
+            ])
+
+        wh_table = Table(table_data_16, colWidths=280, rowHeights=50)
+        wh_table.hAlign = 'CENTER'
+        wh_table.setStyle(TableStyle(
+            [('INNERGRID', (0, 0), (-1, -1), 0.25, colors.black),
+             ('BOX', (0, 0), (-1, -1), 0.5, colors.black),
+             ('VALIGN', (0, 0), (-1, 0), 'MIDDLE'),
+             ('BACKGROUND', (0, 0), (-1, 0), colors.gray)]))
+        data.append(wh_table)
+        data.append(Spacer(1,1))    
+#---------------------------------------------------------------------  
+
+
+
+
 
 
 
@@ -321,6 +577,7 @@ class PdfPrint:
         d.add(chart)
         # add drawing to data
         data.append(d)
+
 
         doc.build(data)
         pdf = self.buffer.getvalue()

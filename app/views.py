@@ -54,14 +54,12 @@ def report(request):
             date = form.cleaned_data.get('date')
             roomNum = form.cleaned_data.get('roomNum')
             GFR = form.cleaned_data.get('GFR')
-            renal_impairment = form.cleaned_data.get('renal_impairment')
+            Child_pugh_score = form.cleaned_data.get('Child_pugh_score')
             Liver_Imparrenenty = form.cleaned_data.get('Liver_Imparrenenty')
             Dose_adjustment = form.cleaned_data.get('Dose_adjustment')
-            Dose_adjustment_LI = form.cleaned_data.get('Dose_adjustment_LI')
             Urine_output = form.cleaned_data.get('Urine_output')
             Balance = form.cleaned_data.get('Balance')
             intervention = form.cleaned_data.get('intervention')
-            Child_pugh_score = form.cleaned_data.get('Child_pugh_score')
             Feeding = form.cleaned_data.get('Feeding')
             Bowel_motion = form.cleaned_data.get('Bowel_motion')
             Electrolytes_imbalance = form.cleaned_data.get('Electrolytes_imbalance')
@@ -90,7 +88,7 @@ def report(request):
             report = ClinicalPharmacist(MRD=MRD, date = date , GFR = GFR, renal_impairment = renal_impairment,
                 Liver_Imparrenenty = Liver_Imparrenenty, Dose_adjustment = Dose_adjustment,  Urine_output = Urine_output, 
                 Balance = Balance, intervention= intervention ,Child_pugh_score = Child_pugh_score, Feeding = Feeding, 
-                Bowel_motion=Bowel_motion ,Dose_adjustment_LI = Dose_adjustment_LI   ,
+                Bowel_motion=Bowel_motion , 
                 Electrolytes_imbalance = Electrolytes_imbalance, Hyper_Hypo = Hyper_Hypo,
                 ABI = ABI, Metabolic_num = Metabolic_num, 
                 Respiratory_num=Respiratory_num ,Metabolic = Metabolic   ,

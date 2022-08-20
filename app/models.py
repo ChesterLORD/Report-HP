@@ -1,4 +1,6 @@
 from django.db import models
+from multiselectfield import MultiSelectField
+
 
 
 class HospitalMRD(models.Model):
@@ -14,15 +16,6 @@ class HospitalMRD(models.Model):
         return self.MRD
 
 
-class Temperature(models.Model):
-    station = models.ForeignKey(HospitalMRD, on_delete=models.CASCADE)
-    date = models.DateField()
-    max = models.DecimalField(max_digits=4, decimal_places=1)
-    mean = models.DecimalField(max_digits=4, decimal_places=1)
-    min = models.DecimalField(max_digits=4, decimal_places=1)
-
-    def __str__(self):
-        return str(self.date)
 
 class ClinicalPharmacist(models.Model):
     URINE_OUTPUT_CHOICES = [
@@ -163,9 +156,6 @@ class ClinicalPharmacist(models.Model):
   
 
     TREATMENT_CHOICES = [
-    ('Antifungal', 'Antifungal'),
-    ('Antiviral', 'Antiviral'),
-    ('Antimonial', 'Antimonial'),
     ('AB-A',(
                 ('Ampicillin', 'Ampicillin'),
                 ('Amoxiclav', 'Amoxiclav'),
@@ -266,6 +256,12 @@ class ClinicalPharmacist(models.Model):
               
     ('AB-V',(
                 ('Voriconazole', 'Voriconazole'),
+                
+                
+                
+                )
+            ),
+    ('AB-G',(
                 ('Ganciclovir', 'Ganciclovir'),
                 
                 
@@ -315,37 +311,35 @@ class ClinicalPharmacist(models.Model):
     MRD = models.ForeignKey(HospitalMRD, on_delete=models.CASCADE)
     patient = models.CharField( max_length=512, default=False)
     date = models.DateField()
-    GFR = models.IntegerField( null=True, blank=True)
-    renal_impairment = models.BooleanField(null=True, blank=True)
+    GFR = models.FloatField( null=True, blank=True)
+    Child_pugh_score = models.FloatField( default=True)
     Liver_Imparrenenty = models.BooleanField(null=True, blank=True)
-    Child_pugh_score = models.IntegerField( default=True)
-    Dose_adjustment  = models.BooleanField(null=True, blank=True)
+    Dose_adjustment = models.BooleanField(null=True, blank=True)
     Balance  = models.CharField( max_length=512, choices=BALANCE_CHOICES, default=False)
     intervention = models.BooleanField(null=True, blank=True)
-    Dose_adjustment_LI = models.BooleanField(null=True, blank=True)
     Urine_output  = models.CharField( max_length=512, choices=URINE_OUTPUT_CHOICES, default=False)
     Feeding  = models.CharField( max_length=512, choices=FEEDING_CHOICES, default=False)
     Bowel_motion  = models.CharField( max_length=512, default=False)
-    Electrolytes_imbalance = models.CharField(max_length=512,choices=ELECTROLYTES_CHOICES , default=False)    
+    Electrolytes_imbalance = MultiSelectField(max_length=512,choices=ELECTROLYTES_CHOICES , default=False)    
     Hyper_Hypo  = models.CharField( max_length=512, choices=HYPER_HYPO_CHOICES, default=False)
     ABI  = models.CharField(max_length=512,choices=ABI_CHOICES , default=False)    
-    Metabolic_num = models.IntegerField( null=True, blank=True)
-    Respiratory_num = models.IntegerField(null=True, blank=True)
+    Metabolic_num = models.FloatField( null=True, blank=True)
+    Respiratory_num = models.FloatField(null=True, blank=True)
     Metabolic   = models.CharField( max_length=512, choices=METABOLIC_CHOICES, default=False)
     Respiratory  = models.CharField( max_length=512, choices=RESPIRATORY_CHOICES, default=False)
     QT_C  = models.CharField( max_length=512, choices=QT_C_CHOICES, default=False)
-    QT_C_num = models.IntegerField( null=True, blank=True)
-    VITALS  = models.CharField( max_length=512, choices=VITALS_CHOICES , default=False)
+    QT_C_num = models.FloatField( null=True, blank=True)
+    VITALS  = MultiSelectField( max_length=512, choices=VITALS_CHOICES , default=False)
     Analgesic_management  = models.BooleanField(null=True, blank=True)
     Sedation = models.BooleanField(null=True, blank=True)
     Thromboembolic_Prophylaxis = models.CharField( max_length=512, choices=TP_CHOICES, default=False)
     Stress_Ulcer_Pophylaxis = models.CharField( max_length=512, choices=SUP_CHOICES , default=False)
     Glycemic_control_target_BG  = models.BooleanField(null=True, blank=True)
-    T_BG = models.CharField( max_length=512, choices=T_BG_CHOICES , default=False)
-    Infection  = models.CharField( max_length=512, choices=INFECTION_CHOICES , default=False)
-    Treatment  = models.CharField( max_length=512, choices=TREATMENT_CHOICES , default=False)
-    AB_INTERVENTION  = models.CharField( max_length=512, choices=AB_INTERVENTION_CHOICES , default=False)
-    MP_LIST  = models.CharField( max_length=512, choices=AB_MP_CHOICES , default=False)
+    T_BG = MultiSelectField( max_length=512, choices=T_BG_CHOICES , default=False)
+    Infection  = MultiSelectField( max_length=512, choices=INFECTION_CHOICES , default=False)
+    Treatment  = MultiSelectField( max_length=512, choices=TREATMENT_CHOICES , default=False)
+    AB_INTERVENTION  = MultiSelectField( max_length=512, choices=AB_INTERVENTION_CHOICES , default=False)
+    MP_LIST  = MultiSelectField( max_length=512, choices=AB_MP_CHOICES , default=False)
 
 
     status = models.BooleanField(default= False)
